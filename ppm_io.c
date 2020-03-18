@@ -1,4 +1,4 @@
-
+//Vasant Bhardwaj: Vbhardw2
 // __Add your name and JHED above__
 // ppm_io.c
 // 601.220, Spring 2019
@@ -47,7 +47,7 @@ Image * read_ppm(FILE *fp) {
   }
 
   
-  return im;  //TO DO: replace this stub
+  return im; 
   free(im);
 }
 
