@@ -11,8 +11,6 @@
 #include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include "ppm_io.h"
-#include "imageManip.h"
 #include <string.h>
 
 /* A struct to store a single RGB pixel, one byte per color channel.

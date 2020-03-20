@@ -1,6 +1,6 @@
 
 #include <stdio.h>
-#include "ppm_io.h"
+#include "input.h"
 
 
  // Reads file using ppm_io, sends to correct function in imageManip.c
