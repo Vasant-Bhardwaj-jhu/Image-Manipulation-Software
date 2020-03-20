@@ -3,8 +3,8 @@ CFLAGS=-std=c99 -pedantic -Wall -Wextra -g
 
 
 
-project: imageManip.o ppm_io.o project.o
-	$(CC) $(CFLAGS) imageManip.o ppm_io.o project.o -o project -lm
+project: imageManip.o ppm_io.o input.o project.o
+	$(CC) $(CFLAGS) imageManip.o ppm_io.o project.o input.o -o project -lm
 
 project.o: project.c input.h
 	$(CC) $(CFLAGS) -c project.c
