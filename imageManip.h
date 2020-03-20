@@ -1,9 +1,25 @@
 #include <assert.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <math.h>
 #include "ppm_io.h"
 
 /*takes an images an input, then alters the exposure as 
 is stated by the user*/
-void Exposure(Image *im, float n);
-void aBlending(Image *im1, Image *im2, Image *im3, int x);
+void exposure(FILE *im1, FILE *im2, float n);
+/*merges two images together*/
+void aBlending(FILE *im1, FILE *im2, FILE *im3, int n);
+/*zooms into image, puting it into a new image*/
+void zoom_in(FILE*im1, FILE*im2, float n);
+/*zooms out of image, putting it in new image*/
+void zoom_out(FILE*im1, FILE*im2, float n);
+/*applys pointilism techniques to image*/
+void pointilism(FILE *im1, FILE *im2);
+/*swirls image on certain point (x,y) by a certain strength*/
+void swirl(FILE *im1, FILE *im2, int x, int y, int strength);
+/*creates a gaussian matrix*/
+float **Gaussian(float x);
+/*filters one pixel to get blurred output*/
+Pixel convolve(float ** gMatrix, Pixel p);
+/*applys blur, usese Gaussian and convolve*/
+void blur(FILE *im1, FILE *im2, float sigma);
