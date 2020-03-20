@@ -76,9 +76,9 @@ int write_ppm(FILE *fp, const Image *im) {
   return num_pixels_written;
 }
 
-int main() {
-    printf("running");
-    FILE * in = fopen("trees.ppm", "rb");
-    Image *i = read_ppm(in); 
-}
+//int main() {
+//    printf("running");
+//    FILE * in = fopen("trees.ppm", "rb");
+//    Image *i = read_ppm(in);
+//}
 
