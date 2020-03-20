@@ -29,10 +29,3 @@ void aBlending(FILE *in1, FILE *in2, FILE *in3, int n){
     }
   } 
 }
-
-int main() {
-    printf("running");
-    FILE * in = fopen("trees.ppm", "rb");
-    Image *i = read_ppm(in); 
-    Exposure(*i, 1);
-}
