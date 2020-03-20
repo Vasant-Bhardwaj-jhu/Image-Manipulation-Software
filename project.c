@@ -43,7 +43,7 @@ int select_function(int argc, char *argv[]){
         double n = atof(argv[4]);
         exposure(in, out, n);
     }
-    else if (strcmp(choice, "aBlending") == 0) {
+    else if (strcmp(choice, "blend") == 0) {
         int n = atoi(argv[5]);
         FILE *in2 = fopen(argv[3], "rb");
         if (in2 == NULL) {
