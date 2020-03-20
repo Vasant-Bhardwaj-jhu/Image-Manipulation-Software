@@ -8,7 +8,10 @@
 #ifndef PPM_IO_H
 #define PPM_IO_H
 
+#include <assert.h>
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 /* A struct to store a single RGB pixel, one byte per color channel.
  */
@@ -45,6 +48,8 @@ Image * read_ppm(FILE *fp);
  * and return the number of pixels successfully written.
  */
 int write_ppm(FILE *fp, const Image *im);
+int select_function(int argc, char *argv[]);
+int kill(int error);
 
 
 #endif
