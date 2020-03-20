@@ -7,12 +7,12 @@
  // Reads file using ppm_io, sends to correct function in imageManip.c
  // Handles very basic read errors/command line errors
 int main( int argc, char *argv[] ) {
-    return 0;
-    FILE * in = fopen("building.ppm", "rb");
+    FILE * in = fopen("trees.ppm", "rb");
     FILE * out = fopen("treeTestOutput.ppm", "w");
     Image *test = read_ppm(in);
-    write_ppm(out, test);
-    printf("running");
+    printf("in main rows :%d %d\n", test->rows, test->cols);
+    int x = write_ppm(out, test);
+    printf("running %d", x);
     //FILE * in = fopen("trees.ppm", "rb");
     
     //exposure(in, out, 1.0);
