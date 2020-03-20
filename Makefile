@@ -6,7 +6,7 @@ main:
 	make project
 
 project: imageManip.o ppm_io.o project.o
-	$(CC) $(CFLAGS) imageManip.o ppm_io.o project.o -o project
+	$(CC) $(CFLAGS) imageManip.o ppm_io.o project.o -o project -lm
 
 project.o: project.c ppm_io.h imageManip.h
 	$(CC) $(CFLAGS) -c project.c

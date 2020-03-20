@@ -6,7 +6,7 @@
 
 /*takes an images an input, then alters the exposure as 
 is stated by the user*/
-void exposure(FILE *im1, FILE *im2, float n);
+void exposure(FILE *im1, FILE *im2, double n);
 /*merges two images together*/
 void aBlending(FILE *im1, FILE *im2, FILE *im3, int n);
 /*zooms into image, puting it into a new image*/
