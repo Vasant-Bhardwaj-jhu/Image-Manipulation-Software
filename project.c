@@ -14,9 +14,11 @@ int select_function(int argc, char *argv[]){
         kill(1);
     }
 
+    // open input and output file
     FILE * in = fopen(argv[1], "rb");
     FILE * out = fopen(argv[2], "rb");
 
+    // Check their validity
     if (in == NULL) {
         kill(2);
     }
@@ -26,11 +28,14 @@ int select_function(int argc, char *argv[]){
 
     Image *i = read_ppm(in);
 
+    // Make sure input file will open
     if (i == NULL) {
         kill(3);
     }
 
     // Function Execution Begins
+
+    // The desired function
     char choice[12];
     strcpy(choice, argv[3]);
 
@@ -46,28 +51,29 @@ int select_function(int argc, char *argv[]){
         }
         aBlending(in, in2, out, n);
     }
-    else if (strcmp(choice, "zoom_in") == 0) {
-        float n = strtof(argv[4], NULL);
-        zoom_in(in, out, n);
-    }
-    else if (strcmp(choice, "zoom_out") == 0) {
-        float n = strtof(argv[4], NULL);
-        zoom_in(in, out, n);
-    }
-    else if (strcmp(choice, "pointilism") == 0) {
-        pointilism(in, out);
-    }
-    else if (strcmp(choice, "swirl") == 0) {
-        float x = strtof(argv[4], NULL);
-        float y = strtof(argv[5], NULL);
-        float strength = strtof(argv[6], NULL);
-        swirl(in, out, x, y, strength);
-    }
-    else if (strcmp(choice, "blur") == 0) {
-        float sigma = strtof(argv[4], NULL);
-        blur(in, out, sigma);
-    }
+//    else if (strcmp(choice, "zoom_in") == 0) {
+//        float n = strtof(argv[4], NULL);
+//        zoom_in(in, out, n);
+//    }
+//    else if (strcmp(choice, "zoom_out") == 0) {
+//        float n = strtof(argv[4], NULL);
+//        zoom_in(in, out, n);
+//    }
+//    else if (strcmp(choice, "pointilism") == 0) {
+//        pointilism(in, out);
+//    }
+//    else if (strcmp(choice, "swirl") == 0) {
+//        float x = strtof(argv[4], NULL);
+//        float y = strtof(argv[5], NULL);
+//        float strength = strtof(argv[6], NULL);
+//        swirl(in, out, x, y, strength);
+//    }
+//    else if (strcmp(choice, "blur") == 0) {
+//        float sigma = strtof(argv[4], NULL);
+//        blur(in, out, sigma);
+//    }
     else {
+        // invalid requested function
         kill(4);
     }
     return 0;
