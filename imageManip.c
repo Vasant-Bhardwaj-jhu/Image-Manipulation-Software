@@ -18,7 +18,7 @@ void exposure(FILE *in1, FILE *in2, double n){
   }
   write_ppm(in2, im2);
 }
-void aBlending(FILE *in1, FILE *in2, FILE *in3, int n){
+void aBlending(FILE *in1, FILE *in2, FILE *in3, double n){
   Image *im1 = read_ppm(in1);
   Image *im2 = read_ppm(in2);
   Image *im3 = read_ppm(in3);

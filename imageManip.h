@@ -8,18 +8,18 @@
 is stated by the user*/
 void exposure(FILE *im1, FILE *im2, double n);
 /*merges two images together*/
-void aBlending(FILE *im1, FILE *im2, FILE *im3, int n);
+void aBlending(FILE *im1, FILE *im2, FILE *im3, double n);
 /*zooms into image, puting it into a new image*/
-void zoom_in(FILE*im1, FILE*im2, float n);
+void zoom_in(FILE*im1, FILE*im2, double n);
 /*zooms out of image, putting it in new image*/
-void zoom_out(FILE*im1, FILE*im2, float n);
+void zoom_out(FILE*im1, FILE*im2, double n);
 /*applys pointilism techniques to image*/
 void pointilism(FILE *im1, FILE *im2);
 /*swirls image on certain point (x,y) by a certain strength*/
 void swirl(FILE *im1, FILE *im2, int x, int y, int strength);
 /*creates a gaussian matrix*/
-float **Gaussian(float x);
+double **Gaussian(double x);
 /*filters one pixel to get blurred output*/
-Pixel convolve(float ** gMatrix, Pixel p);
+Pixel convolve(double ** gMatrix, Pixel p);
 /*applys blur, usese Gaussian and convolve*/
-void blur(FILE *im1, FILE *im2, float sigma);
+void blur(FILE *im1, FILE *im2, double sigma);
