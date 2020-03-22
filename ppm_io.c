@@ -21,15 +21,15 @@ Image * read_ppm(FILE *fp) {
   Image *im = malloc(sizeof(Image));
   
   fseek (fp, 0, SEEK_END);
-  long lsize = ftell(fp);
-  printf ("%ld\n", lsize);
+  //long lsize = ftell(fp);
+  //printf ("%ld\n", lsize);
   rewind(fp);
   char buffer[2];
   int color;
   fscanf(fp, "%s %d %d %d", buffer, &im->cols, &im->rows, &color);
   fgetc(fp);
-  printf("rows:%d %d \n%ld\n", im->rows, im->cols, sizeof(Pixel) * im->rows * im->cols);
-  int x = ftell(fp);
+  //printf("rows:%d %d \n%ld\n", im->rows, im->cols, sizeof(Pixel) * im->rows * im->cols);
+  //int x = ftell(fp);
   if(buffer[0] != 'P' || buffer[1] != '6'){
     printf("incorrect file format");
     return NULL;
@@ -44,10 +44,10 @@ Image * read_ppm(FILE *fp) {
     return NULL;
   }
    //im->data = malloc(sizeof(Pixel) * im->rows * im->cols);
-   printf("before fread rows:%d %d \n%ld\n", im->rows, im->cols, sizeof(Pixel) * im->rows * im->cols);
+   //printf("before fread rows:%d %d \n%ld\n", im->rows, im->cols, sizeof(Pixel) * im->rows * im->cols);
    fread(pix, sizeof(Pixel),  im->rows * im->cols, fp);
    im->data = pix;
-    printf("after fread rows:%d %d \n%ld\n", im->rows, im->cols, sizeof(Pixel) * im->rows * im->cols);
+    //printf("after fread rows:%d %d \n%ld\n", im->rows, im->cols, sizeof(Pixel) * im->rows * im->cols);
 
  
   return im; 

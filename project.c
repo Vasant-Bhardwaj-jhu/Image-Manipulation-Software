@@ -16,7 +16,7 @@ int select_function(int argc, char *argv[]){
 
     // open input and output file
     FILE * in = fopen(argv[1], "rb");
-    FILE * out = fopen(argv[2], "rb");
+    FILE * out = fopen(argv[2], "wb"); //putput is cnaged to wb because cannot write into it
 
     // Check their validity
     if (in == NULL) {

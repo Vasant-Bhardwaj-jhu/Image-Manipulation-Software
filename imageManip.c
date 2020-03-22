@@ -8,15 +8,27 @@
 
 void exposure(FILE *in1, FILE *in2, double n){
   Image *im1 = read_ppm(in1);
-  Image *im2 = NULL;
-  for (int r = 0; r < im2->rows; r++) {
-    for (int c = 0; c < im2->cols; c++) {
-      im2->data[(r*im2->cols) + c].r = im1->data[(r*im1->cols) + c].r * pow(2, n);
-      im2->data[(r*im2->cols) + c].g = im1->data[(r*im1->cols) + c].r * pow(2, n);
-      im2->data[(r*im2->cols) + c].b = im1->data[(r*im1->cols) + c].r * pow(2, n);
+  for (int r = 0; r < (im1->cols * im1->rows); r++) {
+    if((int) im1->data[r].r * pow(2, n) > 255){
+      im1->data[r].r = 255;
+    }
+    else{
+      im1->data[r].r = im1->data[r].r * pow(2, n);
+    }
+    if((int) im1->data[r].g * pow(2, n) > 255){
+      im1->data[r].g = 255;
+    }
+    else{
+      im1->data[r].g = im1->data[r].g * pow(2, n);
+    }
+    if((int) im1->data[r].b * pow(2, n) > 255){
+      im1->data[r].b = 255;
+    }
+    else{
+      im1->data[r].b = im1->data[r].b * pow(2, n);
     }
   }
-  write_ppm(in2, im2);
+  write_ppm(in2, im1);
 }
 void aBlending(FILE *in1, FILE *in2, FILE *in3, double n){
   Image *im1 = read_ppm(in1);
