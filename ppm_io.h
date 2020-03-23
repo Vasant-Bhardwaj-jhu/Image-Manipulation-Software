@@ -50,6 +50,7 @@ Image * read_ppm(FILE *fp);
 int write_ppm(FILE *fp, const Image *im);
 int select_function(int argc, char *argv[]);
 int kill(int error);
+Image * create_empty(int r, int c);
 
 
 #endif

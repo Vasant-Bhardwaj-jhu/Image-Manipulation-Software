@@ -42,3 +42,17 @@ void aBlending(FILE *in1, FILE *in2, FILE *in3, double n){
     }
   } 
 }
+
+void zoom_in(FILE*im1, FILE*im2, double n) {
+    Image *im1 = read_ppm(in1);
+    int r = im1->rows;
+    int c = im1->cols
+
+    Image out = create_empty(r, c);
+
+
+    for (int i = 0; i < (r*c); i+=4) {
+        out->data[i]
+        out->data[i + 1]
+    }
+}

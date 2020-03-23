@@ -16,7 +16,7 @@ int select_function(int argc, char *argv[]){
 
     // open input and output file
     FILE * in = fopen(argv[1], "rb");
-    FILE * out = fopen(argv[2], "wb"); //putput is cnaged to wb because cannot write into it
+    FILE * out = fopen(argv[2], "wb");
 
     // Check their validity
     if (in == NULL) {
@@ -44,32 +44,32 @@ int select_function(int argc, char *argv[]){
         exposure(in, out, n);
     }
     else if (strcmp(choice, "blend") == 0) {
-        int n = atoi(argv[5]);
+        double n = atof(argv[5]);
         FILE *in2 = fopen(argv[3], "rb");
         if (in2 == NULL) {
             kill(2);
         }
         aBlending(in, in2, out, n);
     }
-//    else if (strcmp(choice, "zoom_in") == 0) {
-//        float n = strtof(argv[4], NULL);
-//        zoom_in(in, out, n);
-//    }
+    else if (strcmp(choice, "zoom_in") == 0) {
+        double n = atof(argv[4]);
+        zoom_in(in, out, n);
+    }
 //    else if (strcmp(choice, "zoom_out") == 0) {
-//        float n = strtof(argv[4], NULL);
+//        double n = atof(argv[4]);
 //        zoom_in(in, out, n);
 //    }
 //    else if (strcmp(choice, "pointilism") == 0) {
 //        pointilism(in, out);
 //    }
 //    else if (strcmp(choice, "swirl") == 0) {
-//        float x = strtof(argv[4], NULL);
-//        float y = strtof(argv[5], NULL);
-//        float strength = strtof(argv[6], NULL);
+//        int x = atoi(argv[4]);
+//        int y = atoi(argv[5]);
+//        int strength = atoi(argv[6]);
 //        swirl(in, out, x, y, strength);
 //    }
 //    else if (strcmp(choice, "blur") == 0) {
-//        float sigma = strtof(argv[4], NULL);
+//        double sigma = atof(argv[4]);
 //        blur(in, out, sigma);
 //    }
     else {
