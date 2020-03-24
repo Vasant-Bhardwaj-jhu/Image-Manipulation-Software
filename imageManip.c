@@ -49,17 +49,21 @@ void zoom_in(FILE*in1, FILE*in2) {
     int c = im1->cols;
 
     Image * out = create_empty(r * 2, c * 2);
-
     int size = r * c;
-    for (int i = 0; i < r; i++) {
-        for (int j = 0; j < c; j++) {
-            Pixel p = im1->data[i*j];
-            out->data[j*i] = p;
-            out->data[j*i + 1] = p;
-            out->data[j*i + size] = p;
-            out->data[j*i + 1 + size] = p;
+
+    int pos = 0;
+    for (int i = 0; i < size * 4; i += (c * 4)){
+        for (int j = i; j < (i + c * 2); j += 2) {
+            Pixel p = im1->data[pos];
+            out->data[j] = p;
+            out->data[j + 1] = p;
+            out->data[j + (c * 2)] = p;
+            out->data[j + (c * 2) + 1] = p;
+            pos++;
         }
     }
+
+
     write_ppm(in2, out);
     free(out);
 }
