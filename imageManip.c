@@ -67,3 +67,28 @@ void zoom_in(FILE*in1, FILE*in2) {
     write_ppm(in2, out);
     free(out);
 }
+
+void zoom_out(FILE* in1, FILE*in2) {
+    Image *im1 = read_ppm(in1);
+    int r = im1->rows;
+    int c = im1->cols;
+
+    Image * out = create_empty(r / 2, c / 2);
+    int size = r * c;
+    int pos = 0;
+
+    for (int i = 0; i < size; i += (c * 4)){
+        for (int j = i; j < (i + c * 2); j += 2) {
+
+            Pixel p;
+            p.r = (im1->data[j].r + im1->data[j + 1].r + im1->data[j + (c * 2)].r + im1->data[j + (c * 2) + 1].r) / 4;
+            p.b = (im1->data[j].b + im1->data[j + 1].b + im1->data[j + (c * 2)].b + im1->data[j + (c * 2) + 1].b) / 4;
+            p.g = (im1->data[j].g + im1->data[j + 1].g + im1->data[j + (c * 2)].g + im1->data[j + (c * 2) + 1].g) / 4;
+            out->data[pos] = p;
+            pos++;
+        }
+    }
+
+    write_ppm(in2, out);
+    free(out);
+}

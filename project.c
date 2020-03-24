@@ -54,9 +54,9 @@ int select_function(int argc, char *argv[]){
     else if (strcmp(choice, "zoom_in") == 0) {
         zoom_in(in, out);
     }
-//    else if (strcmp(choice, "zoom_out") == 0) {
-//        zoom_out(in, out);
-//    }
+    else if (strcmp(choice, "zoom_out") == 0) {
+        zoom_out(in, out);
+    }
 //    else if (strcmp(choice, "pointilism") == 0) {
 //        pointilism(in, out);
 //    }
