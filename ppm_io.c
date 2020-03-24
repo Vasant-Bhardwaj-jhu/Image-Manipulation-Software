@@ -79,14 +79,14 @@ int write_ppm(FILE *fp, const Image *im) {
 }
 
 Image * create_empty(int r, int c){
-    struct Image out;
+    Image * out = malloc(sizeof(Image));
     out->rows = r;
     out->cols = c;
 
-    Pixel * dataOut[] = malloc(sizeof(Pixel) * r * c * 4);
+    Pixel * dataOut = malloc(sizeof(Pixel) * r * c * 4);
     out->data = dataOut;
 
-    return &out;
+    return out;
 }
 
 int kill(int error){

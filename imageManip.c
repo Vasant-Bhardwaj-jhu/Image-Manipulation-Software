@@ -43,16 +43,23 @@ void aBlending(FILE *in1, FILE *in2, FILE *in3, double n){
   } 
 }
 
-void zoom_in(FILE*im1, FILE*im2, double n) {
+void zoom_in(FILE*in1, FILE*in2) {
     Image *im1 = read_ppm(in1);
     int r = im1->rows;
-    int c = im1->cols
+    int c = im1->cols;
 
-    Image out = create_empty(r, c);
+    Image * out = create_empty(r * 2, c * 2);
 
-
-    for (int i = 0; i < (r*c); i+=4) {
-        out->data[i]
-        out->data[i + 1]
+    int size = r * c;
+    for (int i = 0; i < r; i++) {
+        for (int j = 0; j < c; j++) {
+            Pixel p = im1->data[i*j];
+            out->data[j*i] = p;
+            out->data[j*i + 1] = p;
+            out->data[j*i + size] = p;
+            out->data[j*i + 1 + size] = p;
+        }
     }
+    write_ppm(in2, out);
+    free(out);
 }

@@ -52,12 +52,10 @@ int select_function(int argc, char *argv[]){
         aBlending(in, in2, out, n);
     }
     else if (strcmp(choice, "zoom_in") == 0) {
-        double n = atof(argv[4]);
-        zoom_in(in, out, n);
+        zoom_in(in, out);
     }
 //    else if (strcmp(choice, "zoom_out") == 0) {
-//        double n = atof(argv[4]);
-//        zoom_in(in, out, n);
+//        zoom_out(in, out);
 //    }
 //    else if (strcmp(choice, "pointilism") == 0) {
 //        pointilism(in, out);
