@@ -13,8 +13,8 @@ void aBlending(FILE *im1, FILE *im2, FILE *im3, double n);
 void zoom_in(FILE*im1, FILE*im2);
 /*zooms out of image, putting it in new image*/
 void zoom_out(FILE*im1, FILE*im2);
-/*applys pointilism techniques to image*/
-void pointilism(FILE *im1, FILE *im2);
+/*applys pointillism techniques to image*/
+void pointillism(FILE *in1, FILE *in2);
 /*swirls image on certain point (x,y) by a certain strength*/
 void swirl(FILE *im1, FILE *im2, int x, int y, int strength);
 /*creates a gaussian matrix*/

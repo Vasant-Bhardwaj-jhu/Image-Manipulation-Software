@@ -30,6 +30,7 @@ void exposure(FILE *in1, FILE *in2, double n){
   }
   write_ppm(in2, im1);
 }
+
 void aBlending(FILE *in1, FILE *in2, FILE *in3, double n){
   Image *im1 = read_ppm(in1);
   Image *im2 = read_ppm(in2);
@@ -93,26 +94,22 @@ void zoom_out(FILE* in1, FILE*in2) {
     free(out);
 }
 
-void pointilism(FILE *in1, FILE *in2){
+void pointillism(FILE *in1, FILE *in2){
     Image *im1 = read_ppm(in1);
     int size = im1->cols * im1->rows;
+    int width = im1->cols;
 
     for (int i = 0; i < (size * 0.03); i++) {
         int pos = rand() % (size + 1);
         int r = rand() % 5 + 1;
 
         Pixel p = im1->data[pos];
-        int stack[100];
-        stack[0] = pos;
-        int counter = 1;
-        for (int j = 0; j < r; j++) {
-
-
+        for (int i = 0; i < size; i ++){
+            if (((i % width - pos % width) ^ 2) + ((i / width  - pos / width) ^ 2) <= (r^2)) {
+                im1->data[i] = p;
             }
-
         }
-
-
     }
 
+    write_ppm(in2, im1);
 }

@@ -31,11 +31,11 @@ Image * read_ppm(FILE *fp) {
     //printf("rows:%d %d \n%ld\n", im->rows, im->cols, sizeof(Pixel) * im->rows * im->cols);
     //int x = ftell(fp);
     if(buffer[0] != 'P' || buffer[1] != '6'){
-        kill(3)
+        kill(3);
         return NULL;
     }
     if(color != 255){
-        kill(3)
+        kill(3);
         return NULL;
     }
     Pixel *pix = malloc(sizeof(Pixel) * im->rows * im->cols);
