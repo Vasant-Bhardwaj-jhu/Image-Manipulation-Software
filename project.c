@@ -57,9 +57,9 @@ int select_function(int argc, char *argv[]){
     else if (strcmp(choice, "zoom_out") == 0) {
         zoom_out(in, out);
     }
-//    else if (strcmp(choice, "pointilism") == 0) {
-//        pointilism(in, out);
-//    }
+    else if (strcmp(choice, "pointilism") == 0) {
+        pointilism(in, out);
+    }
 //    else if (strcmp(choice, "swirl") == 0) {
 //        int x = atoi(argv[4]);
 //        int y = atoi(argv[5]);

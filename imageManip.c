@@ -92,3 +92,27 @@ void zoom_out(FILE* in1, FILE*in2) {
     write_ppm(in2, out);
     free(out);
 }
+
+void pointilism(FILE *in1, FILE *in2){
+    Image *im1 = read_ppm(in1);
+    int size = im1->cols * im1->rows;
+
+    for (int i = 0; i < (size * 0.03); i++) {
+        int pos = rand() % (size + 1);
+        int r = rand() % 5 + 1;
+
+        Pixel p = im1->data[pos];
+        int stack[100];
+        stack[0] = pos;
+        int counter = 1;
+        for (int j = 0; j < r; j++) {
+
+
+            }
+
+        }
+
+
+    }
+
+}

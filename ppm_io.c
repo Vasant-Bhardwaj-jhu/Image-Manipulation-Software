@@ -31,11 +31,11 @@ Image * read_ppm(FILE *fp) {
     //printf("rows:%d %d \n%ld\n", im->rows, im->cols, sizeof(Pixel) * im->rows * im->cols);
     //int x = ftell(fp);
     if(buffer[0] != 'P' || buffer[1] != '6'){
-        printf("incorrect file format");
+        kill(3)
         return NULL;
     }
     if(color != 255){
-        printf("wrong hue value");
+        kill(3)
         return NULL;
     }
     Pixel *pix = malloc(sizeof(Pixel) * im->rows * im->cols);
@@ -79,6 +79,7 @@ int write_ppm(FILE *fp, const Image *im) {
 }
 
 Image * create_empty(int r, int c){
+    // Dont forget to free
     Image * out = malloc(sizeof(Image));
     out->rows = r;
     out->cols = c;
