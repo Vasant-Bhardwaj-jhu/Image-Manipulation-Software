@@ -78,8 +78,8 @@ void zoom_out(FILE* in1, FILE*in2) {
     int size = r * c;
     int pos = 0;
 
-    for (int i = 0; i < size; i += (c * 4)){
-        for (int j = i; j < (i + c * 2); j += 2) {
+    for (int i = 0; i <= size; i += (c * 4)){
+        for (int j = i; j <= (i + c * 2); j += 2) {
 
             Pixel p;
             p.r = (im1->data[j].r + im1->data[j + 1].r + im1->data[j + (c * 2)].r + im1->data[j + (c * 2) + 1].r) / 4;
