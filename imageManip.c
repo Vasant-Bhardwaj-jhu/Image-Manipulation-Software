@@ -104,14 +104,18 @@ void pointillism(FILE *in1, FILE *in2){
         int r = rand() % 5 + 1;
         Pixel p = im1->data[pos];
 
+        // Optimization, avoids scanning through whole image
+        // check possible underflow
         int start = pos - (width * (r+1));
         if (start < 0) {
             start = 0;
         }
+        // check overflow
         int end = pos + (width * (r+1));
         if (end > size){
             end = size;
         }
+
         for (int i = start; i < end; i++){
             // (x - center_x)^2 + (y - center_y)^2 < radius^2
             if (pow((i % width - pos % width), 2) + pow((i / width  - pos / width),2) <= pow(r, 2)) {
