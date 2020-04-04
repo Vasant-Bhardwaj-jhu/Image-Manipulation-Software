@@ -99,13 +99,22 @@ void pointillism(FILE *in1, FILE *in2){
     int size = im1->cols * im1->rows;
     int width = im1->cols;
 
-    for (int i = 0; i < (size * 0.03); i++) {
+    for (int j = 0; j < (size * 0.03); j++) {
         int pos = rand() % (size + 1);
         int r = rand() % 5 + 1;
-
         Pixel p = im1->data[pos];
-        for (int i = 0; i < size; i ++){
-            if (((i % width - pos % width) ^ 2) + ((i / width  - pos / width) ^ 2) <= (r^2)) {
+
+        int start = pos - (width * (r+1));
+        if (start < 0) {
+            start = 0;
+        }
+        int end = pos + (width * (r+1));
+        if (end > size){
+            end = size;
+        }
+        for (int i = start; i < end; i++){
+            // (x - center_x)^2 + (y - center_y)^2 < radius^2
+            if (pow((i % width - pos % width), 2) + pow((i / width  - pos / width),2) <= pow(r, 2)) {
                 im1->data[i] = p;
             }
         }
