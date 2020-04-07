@@ -60,12 +60,12 @@ int select_function(int argc, char *argv[]){
     else if (strcmp(choice, "pointilism") == 0) {
         pointillism(in, out);
     }
-//    else if (strcmp(choice, "swirl") == 0) {
-//        int x = atoi(argv[4]);
-//        int y = atoi(argv[5]);
-//        int strength = atoi(argv[6]);
-//        swirl(in, out, x, y, strength);
-//    }
+    else if (strcmp(choice, "swirl") == 0) {
+        int x = atoi(argv[4]);
+        int y = atoi(argv[5]);
+        int strength = atoi(argv[6]);
+        swirl(in, out, x, y, strength);
+    }
 //    else if (strcmp(choice, "blur") == 0) {
 //        double sigma = atof(argv[4]);
 //        blur(in, out, sigma);
