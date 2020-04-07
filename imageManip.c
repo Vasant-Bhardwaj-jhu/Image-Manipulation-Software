@@ -137,7 +137,6 @@ void swirl(FILE *in1, FILE *in2, int c_x, int c_y, int strength) {
     int x,y,mod_x,mod_y,new_x,new_y,new_i;
 
     for (int i = 0; i < size; i++) {
-        Pixel p = im1->data[i];
 
         x = i % width;
         mod_x = x - c_x;
@@ -150,10 +149,10 @@ void swirl(FILE *in1, FILE *in2, int c_x, int c_y, int strength) {
         new_i = new_x + new_y * width;
 
         if (new_i < size && new_i > 0) {
-            out->data[new_i] = p;
+            out->data[new_i] = im1->data[i];
         }
     }
 
-    write_ppm(in2, im1);
+    write_ppm(in2, out);
     free(out);
 }
