@@ -5,7 +5,6 @@
 #include "ppm_io.h"
 #include "imageManip.h"
 
-
 void exposure(FILE *in1, FILE *in2, double n){
   Image *im1 = read_ppm(in1);
   for (int r = 0; r < (im1->cols * im1->rows); r++) {
@@ -156,3 +155,59 @@ void swirl(FILE *in1, FILE *in2, int c_x, int c_y, int strength) {
     write_ppm(in2, out);
     free(out);
 }
+double **Gaussian(double x){
+  int n = x*10;
+  if(n % 2 == 0){
+    n++;
+  }
+  int y = (n+1)/2;
+  double *gArray = malloc(sizeof(double) * n *n);
+  double *sArray = malloc(sizeof(double) * y *y);
+  //gets sample array
+  for(int i = 0; i < y; i++){
+    for(int j = 0; j < y; j++){
+      sArray[(i*y)+j] = (1.0 / (2.0 * 3.14159265 * (x*x))) * exp( -((i*i)+(j*j)) / (2 * (x*x)));
+      printf("%f ", sArray[(i*y)+j]);
+    }
+    printf("\n");
+  }
+  //printf("\n");
+  
+  //copies array to bottom right quadrant
+  int a = 0;
+  for(int i = y-1; i < n ; i++){
+    for(int j = y; j <= n; j++){
+      gArray[(i*n) + j] = sArray[a];
+      a++;
+      //printf("%d is: %f ",(i*n) +j, gArray[(i*n)+j]);
+    }
+    //printf("\n");
+  }
+
+  printf("\n");
+  //populates reverse array to bottom right quadrant
+  for(int i = y-1; i < n; i ++){
+    for(int j = 1; j <= y-1; j++){
+      gArray[(i*n) + j] = gArray[((i+1)*n) - (j-1)];
+      //printf("%d is: %f ",(i*n) +j, gArray[(i*n)+j]);
+    }
+    //printf("\n");
+  }
+  printf("\n");
+  //populates top half with reverse of bottom half
+  for(int i = 0; i < y-1; i++){
+    for(int j = 1; j <= n ; j++){
+      gArray[(i*n) + j] = gArray[n*n-(i*n +j-1)];
+      //printf("%d is: %f ",(i*n) +j, gArray[(i*n)+j]);
+    }
+    //printf("\n");
+  }
+  //prints final array
+  for(int i = 0; i < n; i++){
+    for(int j = 1; j <= n ; j++){
+      printf("%f ", gArray[(i*n)+j]);
+    }
+    printf("\n");
+  }
+}
+
