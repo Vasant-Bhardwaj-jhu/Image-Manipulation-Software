@@ -126,3 +126,34 @@ void pointillism(FILE *in1, FILE *in2){
 
     write_ppm(in2, im1);
 }
+
+void swirl(FILE *in1, FILE *in2, int c_x, int c_y, int strength) {
+    Image *im1 = read_ppm(in1);
+    Image * out = create_empty(im1->rows, im1->cols);
+
+    int width = im1->cols;
+    int size = im1->cols * im1->rows;
+
+    int x,y,mod_x,mod_y,new_x,new_y,new_i;
+
+    for (int i = 0; i < size; i++) {
+        Pixel p = im1->data[i];
+
+        x = i % width;
+        mod_x = x - c_x;
+        y = i / width;
+        mod_y = y - c_y;
+
+        double alpha = sqrt(pow(mod_x, 2) + pow(mod_y, 2)) / (double) strength
+        new_x = mod_x * cos(alpha) - mod_y * sin(alpha) + c_x;
+        new_y = mod_x * sin(alpha) + mod_y * cos(alpha) + c_y;
+        new_i = new_x + new_y * width;
+
+        if (new_i < size && new_i > 0) {
+            out->data[new_i] = p;
+        }
+    }
+
+    write_ppm(in2, im1);
+    free(out);
+}
