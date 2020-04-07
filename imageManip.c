@@ -144,12 +144,12 @@ void swirl(FILE *in1, FILE *in2, int c_x, int c_y, int strength) {
         mod_y = y - c_y;
 
         double alpha = sqrt(pow(mod_x, 2) + pow(mod_y, 2)) / (double) strength;
-        new_x = mod_x * cos(alpha) - mod_y * sin(alpha) + c_x;
-        new_y = mod_x * sin(alpha) + mod_y * cos(alpha) + c_y;
+        new_x = (mod_x * cos(alpha)) - (mod_y * sin(alpha)) + c_x;
+        new_y = (mod_x * sin(alpha)) + (mod_y * cos(alpha)) + c_y;
         new_i = new_x + new_y * width;
 
         if (new_i < size && new_i > 0) {
-            out->data[new_i] = im1->data[i];
+            out->data[i] = im1->data[new_i];
         }
     }
 
