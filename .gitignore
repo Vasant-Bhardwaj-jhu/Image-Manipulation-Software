@@ -60,3 +60,6 @@ dkms.conf
 .idea/modules.xml
 .idea/vcs.xml
 /.vscode/
+/out.ppm
+/project.exe.stackdump
+/.idea/dictionaries/tadzi.xml

@@ -117,6 +117,7 @@ int kill(int error){
             fprintf(stderr, " Error condition not specified ");
             break;
     }
+    printf("\n");
     exit(error);
 }
 
