@@ -25,10 +25,20 @@ Image * read_ppm(FILE *fp) {
     //printf ("%ld\n", lsize);
     rewind(fp);
     char buffer[2];
+    char comment[1000];
     int color;
-    fscanf(fp, "%s %d %d %d", buffer, &im->cols, &im->rows, &color);
+    fscanf(fp, "%s ", buffer );//" %d %d %d", buffer, &im->cols, &im->rows, &color);
+    char x =fgetc(fp);
+    //printf("%c", x);
+    if(x == '#'){
+        fgets(comment, 1000, fp);
+    }
+    else{
+        fseek(fp, -1, SEEK_CUR);
+    }
+    fscanf(fp, "%d %d %d", &im->cols, &im->rows, &color);
     fgetc(fp);
-    //printf("rows:%d %d \n%ld\n", im->rows, im->cols, sizeof(Pixel) * im->rows * im->cols);
+    //printf("rows: %d cols: %d \nsize: %ld\n", im->rows, im->cols, sizeof(Pixel) * im->rows * im->cols);
     //int x = ftell(fp);
     if(buffer[0] != 'P' || buffer[1] != '6'){
         kill(3);
