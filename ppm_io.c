@@ -1,8 +1,6 @@
-//Vasant Bhardwaj: Vbhardw2
-// __Add your name and JHED above__
-// ppm_io.c
-// 601.220, Spring 2019
-// Starter code for midterm project - feel free to edit/add to this file
+// Tadeusz Sikorski - tsikors2
+// Vasant Bhardwaj - Vbhardw2
+// CS Spring 2020, 601.220
 
 #include <assert.h>
 #include <stdlib.h>

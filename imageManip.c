@@ -1,3 +1,7 @@
+// Tadeusz Sikorski - tsikors2
+// Vasant Bhardwaj - Vbhardw2
+// CS Spring 2020, 601.220
+
 #include <assert.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -52,9 +56,11 @@ void zoom_in(FILE*in1, FILE*in2) {
     int size = r * c;
 
     int pos = 0;
+    // iterate by row and column
     for (int i = 0; i < size * 4; i += (c * 4)){
         for (int j = i; j < (i + c * 2); j += 2) {
             Pixel p = im1->data[pos];
+            // modify the 4 equivalent squares
             out->data[j] = p;
             out->data[j + 1] = p;
             out->data[j + (c * 2)] = p;
@@ -81,6 +87,7 @@ void zoom_out(FILE* in1, FILE*in2) {
         for (int j = i; j <= (i + c * 2); j += 2) {
 
             Pixel p;
+            // average the colors
             p.r = (im1->data[j].r + im1->data[j + 1].r + im1->data[j + (c * 2)].r + im1->data[j + (c * 2) + 1].r) / 4;
             p.b = (im1->data[j].b + im1->data[j + 1].b + im1->data[j + (c * 2)].b + im1->data[j + (c * 2) + 1].b) / 4;
             p.g = (im1->data[j].g + im1->data[j + 1].g + im1->data[j + (c * 2)].g + im1->data[j + (c * 2) + 1].g) / 4;
