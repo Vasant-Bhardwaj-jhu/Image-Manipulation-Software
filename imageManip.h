@@ -18,7 +18,7 @@ void pointillism(FILE *in1, FILE *in2);
 /*swirls image on certain point (x,y) by a certain strength*/
 void swirl(FILE *im1, FILE *im2, int x, int y, int strength);
 /*creates a gaussian matrix*/
-double **Gaussian(double x);
+double *Gaussian(double x);
 /*filters one pixel to get blurred output*/
 Pixel convolve(double ** gMatrix, Pixel p);
 /*applys blur, usese Gaussian and convolve*/
