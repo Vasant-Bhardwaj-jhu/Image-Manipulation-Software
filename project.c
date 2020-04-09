@@ -6,7 +6,7 @@
 
 
 // Reads file using ppm_io, sends to correct function in imageManip.c
-// Handles very basic read errors/command line errors
+// Handles read errors/command line errors
 int select_function(int argc, char *argv[]){
 
     // Missing one of the required arguments
@@ -40,11 +40,26 @@ int select_function(int argc, char *argv[]){
     strcpy(choice, argv[3]);
 
     if (strcmp(choice, "exposure") == 0) {
+        if (argc != 5) {
+            kill(5);
+        }
         double n = atof(argv[4]);
+        if (n > 255){
+            n = 255;
+        }
+        if (n < -255){
+            n = -255;
+        }
         exposure(in, out, n);
     }
     else if (strcmp(choice, "blend") == 0) {
+        if (argc != 6) {
+            kill(5);
+        }
         double n = atof(argv[5]);
+        if (n > 1 || n < 0){
+            kill(6);
+        }
         FILE *in2 = fopen(argv[4], "rb");
         if (in2 == NULL) {
             kill(2);
@@ -52,24 +67,43 @@ int select_function(int argc, char *argv[]){
         aBlending(in, out, in2, n);
     }
     else if (strcmp(choice, "zoom_in") == 0) {
+        if (argc != 3) {
+            kill(5);
+        }
         zoom_in(in, out);
     }
     else if (strcmp(choice, "zoom_out") == 0) {
+        if (argc != 3) {
+            kill(5);
+        }
         zoom_out(in, out);
     }
     else if (strcmp(choice, "pointilism") == 0) {
+        if (argc != 3) {
+            kill(5);
+        }
         pointillism(in, out);
     }
     else if (strcmp(choice, "swirl") == 0) {
+        if (argc != 7) {
+            kill(5);
+        }
         int x = atoi(argv[4]);
         int y = atoi(argv[5]);
         int strength = atoi(argv[6]);
+        if (s < 0){
+            kill(6);
+        }
         swirl(in, out, x, y, strength);
     }
-//    else if (strcmp(choice, "blur") == 0) {
-//        double sigma = atof(argv[4]);
-//        blur(in, out, sigma);
-//    }
+    else if (strcmp(choice, "blur") == 0) {
+        if (argc != 5) {
+            kill(5);
+        }
+
+        double sigma = atof(argv[4]);
+        blur(in, out, sigma);
+    }
     else {
         // invalid requested function
         kill(4);
