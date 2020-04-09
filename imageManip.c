@@ -155,7 +155,8 @@ void swirl(FILE *in1, FILE *in2, int c_x, int c_y, int strength) {
     write_ppm(in2, out);
     free(out);
 }
-double **Gaussian(double x){
+
+double *Gaussian(double x){
   int n = x*10;
   if(n % 2 == 0){
     n++;
@@ -166,17 +167,17 @@ double **Gaussian(double x){
   //gets sample array
   for(int i = 0; i < y; i++){
     for(int j = 0; j < y; j++){
-      sArray[(i*y)+j] = (1.0 / (2.0 * 3.14159265 * (x*x))) * exp( -((i*i)+(j*j)) / (2 * (x*x)));
-      printf("%f ", sArray[(i*y)+j]);
+      sArray[(i*y)+j] = (1.0 / (2.0 * 3.1415926 * (x*x))) * exp( -((i*i)+(j*j)) / (2 * (x*x)));
+      //printf("%f ", sArray[(i*y)+j]);
     }
-    printf("\n");
+    //printf("\n");
   }
   //printf("\n");
   
   //copies array to bottom right quadrant
   int a = 0;
   for(int i = y-1; i < n ; i++){
-    for(int j = y; j <= n; j++){
+    for(int j = y-1; j < n; j++){
       gArray[(i*n) + j] = sArray[a];
       a++;
       //printf("%d is: %f ",(i*n) +j, gArray[(i*n)+j]);
@@ -184,30 +185,84 @@ double **Gaussian(double x){
     //printf("\n");
   }
 
-  printf("\n");
+  //printf("\n");
   //populates reverse array to bottom right quadrant
   for(int i = y-1; i < n; i ++){
-    for(int j = 1; j <= y-1; j++){
-      gArray[(i*n) + j] = gArray[((i+1)*n) - (j-1)];
+    for(int j = 0; j < y-1; j++){
+      gArray[(i*n) + j] = gArray[((i+1)*n) - (j+1)];
       //printf("%d is: %f ",(i*n) +j, gArray[(i*n)+j]);
     }
     //printf("\n");
   }
-  printf("\n");
+  //printf("\n");
   //populates top half with reverse of bottom half
   for(int i = 0; i < y-1; i++){
-    for(int j = 1; j <= n ; j++){
-      gArray[(i*n) + j] = gArray[n*n-(i*n +j-1)];
+    for(int j = 0; j < n ; j++){
+      gArray[(i*n) + j] = gArray[n*n-(i*n +j+1)];
       //printf("%d is: %f ",(i*n) +j, gArray[(i*n)+j]);
     }
     //printf("\n");
   }
-  //prints final array
+  /*prints final array
   for(int i = 0; i < n; i++){
-    for(int j = 1; j <= n ; j++){
+    for(int j = 0; j < n ; j++){
       printf("%f ", gArray[(i*n)+j]);
     }
     printf("\n");
+  }*/
+  return gArray;
+}
+Pixel filter(double * gMatrix, Image *im1, int pos, int gSize){
+  Pixel vals;
+  double red = 0;
+  double green = 0;
+  double blue = 0;
+  double sum = 0;
+  Pixel test[gSize*gSize];
+  //initializing pixel matrix array to 0
+  for(int i =0; i <gSize*gSize; i++){
+    test[i].r = 0;
+    test[i].g = 0;
+    test[i].b = 0;
   }
+  int center = gSize*gSize/2;
+  for(int i = -gSize/2; i <= gSize/2; i++){
+    for(int j = -gSize/2; j<= gSize/2; j++){
+      if(pos +(i*im1->cols)+j >= 0 && (pos +(i*im1->cols)+j) < (im1->rows*im1->cols)){
+        if((pos % im1->cols)+j < im1->cols &&(pos % im1->cols)+ j >= 0){
+           test[center+(i*gSize)+j].r = im1->data[pos +(i*im1->cols)+j].r;
+           test[center+(i*gSize)+j].g = im1->data[pos +(i*im1->cols)+j].g;
+           test[center+(i*gSize)+j].b = im1->data[pos +(i*im1->cols)+j].b;
+        }
+      }
+    }
+  }
+  for(int i = 0; i <gSize*gSize; i++){
+    red += test[i].r * gMatrix[i];
+    green += test[i].g * gMatrix[i];
+    blue += test[i].b *gMatrix[i];
+    sum += gMatrix[i];
+  }
+  vals.r = red/sum;
+  vals.g = green/sum;
+  vals.b = blue/sum;
+  //printf("red %f green %f blue %f sum %f vals.r %u vals.g %u vals.b %u\n",red, green, blue, sum, vals.r, vals.g, vals.b);
+  return vals;
 }
 
+void blur(FILE *im1, FILE *im2, double sigma){
+  Image *im = read_ppm(im1);
+  int n = 10* sigma;
+  if(n % 2 == 0){
+    n++;
+  }
+  double *gMatrix = Gaussian(sigma);
+  for(int i = 0; i < im->rows*im->cols; i++){
+    Pixel p = filter(gMatrix, im, i, n);
+    // printf("new: %u %u %u \n", p.r, p.g, p.b);
+    im -> data[i].r = p.r;
+    im -> data[i].g = p.g;
+    im -> data[i].b = p.b;
+  }
+  write_ppm(im2, im);
+}
