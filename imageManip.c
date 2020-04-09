@@ -1,3 +1,7 @@
+// Tadeusz Sikorski - tsikors2
+// Vasant Bhardwaj - Vbhardw2
+// CS Spring 2020, 601.220
+
 #include <assert.h>
 #include <stdlib.h>
 #include <stdio.h>
