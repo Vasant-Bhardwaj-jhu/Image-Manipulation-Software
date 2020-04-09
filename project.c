@@ -94,7 +94,7 @@ int select_function(int argc, char *argv[]){
         int x = atoi(argv[4]);
         int y = atoi(argv[5]);
         int strength = atoi(argv[6]);
-        if (s < 0){
+        if (strength < 0){
             kill(6);
         }
         swirl(in, out, x, y, strength);
