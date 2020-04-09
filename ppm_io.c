@@ -94,7 +94,12 @@ Image * create_empty(int r, int c){
     out->rows = r;
     out->cols = c;
 
-    Pixel * dataOut = malloc(sizeof(Pixel) * r * c * 4);
+    Pixel * dataOut = malloc(sizeof(Pixel) * r * c);
+    for(int i = 0; i < r * c; i++){
+        dataOut[i].r =0;
+        dataOut[i].g = 0;
+        dataOut[i].b = 0;
+    }
     out->data = dataOut;
 
     return out;

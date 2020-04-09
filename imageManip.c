@@ -143,13 +143,19 @@ void swirl(FILE *in1, FILE *in2, int c_x, int c_y, int strength) {
         mod_y = y - c_y;
 
         double alpha = sqrt(pow(mod_x, 2) + pow(mod_y, 2)) / (double) strength;
-        new_x = (mod_x * cos(alpha)) - (mod_y * sin(alpha)) + c_x;
-        new_y = (mod_x * sin(alpha)) + (mod_y * cos(alpha)) + c_y;
-        new_i = new_x + new_y * width;
-
-        if (new_i < size && new_i > 0) {
+        double p1x = (mod_x*cos(alpha));
+        double p1y = (mod_y*sin(alpha));
+        double p2x = (mod_x*sin(alpha));
+        double p2y = (mod_y*cos(alpha));
+        new_x = p1x - p1y + c_x;
+        new_y = p2x + p2y + c_y;
+        if(new_x < im1->cols && new_x >= 0 && new_y < im1->rows && new_y >= 0){
+          new_i = new_x + new_y * width;
+          if (new_i < size && new_i > 0) {
             out->data[i] = im1->data[new_i];
+          }
         }
+        
     }
 
     write_ppm(in2, out);
