@@ -45,11 +45,11 @@ int select_function(int argc, char *argv[]){
     }
     else if (strcmp(choice, "blend") == 0) {
         double n = atof(argv[5]);
-        FILE *in2 = fopen(argv[3], "rb");
+        FILE *in2 = fopen(argv[4], "rb");
         if (in2 == NULL) {
             kill(2);
         }
-        aBlending(in, in2, out, n);
+        aBlending(in, out, in2, n);
     }
     else if (strcmp(choice, "zoom_in") == 0) {
         zoom_in(in, out);

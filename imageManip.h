@@ -8,7 +8,7 @@
 is stated by the user*/
 void exposure(FILE *im1, FILE *im2, double n);
 /*merges two images together*/
-void aBlending(FILE *im1, FILE *im2, FILE *im3, double n);
+void aBlending(FILE *im1, FILE *out, FILE *im3, double n);
 /*zooms into image, puting it into a new image*/
 void zoom_in(FILE*im1, FILE*im2);
 /*zooms out of image, putting it in new image*/
