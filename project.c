@@ -82,7 +82,7 @@ int select_function(int argc, char *argv[]){
         zoom_out(in, out);
     }
     else if (strcmp(choice, "pointilism") == 0) {
-        if (argc != 3) {
+        if (argc != 4) {
             kill(5);
         }
         pointillism(in, out);
